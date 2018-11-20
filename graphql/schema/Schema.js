@@ -7,8 +7,7 @@ const {
           GraphQLString
       } = require('graphql/type');
 
-const compose = require('lodash/fp/compose');
-const assign = require()
+const assign                 = require('lodash/fp/assign');
 const { Page: PageMongoose } = require('../../server/model/page');
 
 /**
@@ -55,55 +54,62 @@ const pageType = new GraphQLObjectType({
         lastUpdatedAt: {
             type:        GraphQLInt,
             description: 'Last updated date'
-        },
+        }
     })
 });
 
-const removeUndefined = (result, val) =>
-    typeof val === 'undefined' ? result : assign(result, {  });
+/**
+ *
+ * @param {object}    args
+ * @param {function}  validator      (val, key) => boolean
+ * @returns {{}}
+ */
+const filterArgs = (args = {}, validator = () => true) => Object.keys(args).reduce(
+    (filtered, key) => {
+        const val = args[key];
+        return validator(val, key) ? assign(filtered, { [key]: val }) : filtered;
+    }, {});
 
-
-const cleanVars = (vars = {}, fns = []) => {
-    const filterFn = fns.length ? compose(...fns) : undefined;
-
-    return Object.keys(vars).reduce(() => filterFn, {});
-};
-
+const validateArg = (val) => typeof val !== 'undefined';
 
 const schema = new GraphQLSchema({
     query: new GraphQLObjectType({
-        name: 'RootQueryType',
+        name:   'RootQueryType',
         fields: {
             page: {
-                type: new GraphQLList(pageType),
-                args: {
-                    _id: {
+                type:    new GraphQLList(pageType),
+                args:    {
+                    _id:   {
                         name: '_id',
-                        type: GraphQLString,
+                        type: GraphQLString
                     },
                     title: {
                         name: 'title',
-                        type: GraphQLString,
+                        type: GraphQLString
                     }
                 },
                 resolve: (root, { _id, title }, source, fieldASTs) => {
                     const projections = getProjection(fieldASTs);
+                    const args        = filterArgs(
+                        { title: new RegExp(title), _id },
+                        validateArg,
+                    );
 
                     const found = new Promise((resolve, reject) => {
-                        PageMongoose.find({ title: new RegExp(title) }, projections, (err, page) => {
-                            console.log(title, page, err);
+                        PageMongoose.find(args, projections, (err, page) => {
                             err ? reject(err) : resolve(page);
-                        })
+                        });
                     });
 
                     return found;
-                },
+                }
             }
         }
-    }),
+    })
 });
 
 module.exports = {
     schema,
     getProjection,
+    filterArgs,
 };

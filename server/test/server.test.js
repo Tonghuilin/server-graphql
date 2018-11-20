@@ -11,7 +11,7 @@ describe('Server', () => {
             return populatePages(pages);
         });
 
-        it('should return page', (done) => {
+        it('should return an array of requested pages', (done) => {
             const title = pages[0].title;
 
             request(app)
@@ -25,7 +25,7 @@ describe('Server', () => {
                     if (err) {
                         return done();
                     };
-                    console.log(title, JSON.stringify(res.body, 4));
+                    expect(res.body.data.page[0].title).toBe(title);
                     done();
                 });
         });
