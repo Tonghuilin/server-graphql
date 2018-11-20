@@ -7,6 +7,8 @@ const {
           GraphQLString
       } = require('graphql/type');
 
+const compose = require('lodash/fp/compose');
+const assign = require()
 const { Page: PageMongoose } = require('../../server/model/page');
 
 /**
@@ -56,6 +58,17 @@ const pageType = new GraphQLObjectType({
         },
     })
 });
+
+const removeUndefined = (result, val) =>
+    typeof val === 'undefined' ? result : assign(result, {  });
+
+
+const cleanVars = (vars = {}, fns = []) => {
+    const filterFn = fns.length ? compose(...fns) : undefined;
+
+    return Object.keys(vars).reduce(() => filterFn, {});
+};
+
 
 const schema = new GraphQLSchema({
     query: new GraphQLObjectType({
