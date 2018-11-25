@@ -1,9 +1,8 @@
-const { logRequest } = require('../core/logger');
+const { logRequest } = require('../helper/logger');
 
 const viewController = (req, res) => {
     logRequest(req);
-console.log(req.path);
-    res.send('123');
+    res.render('index', { title: 'THL' });
 };
 
 module.exports = {

@@ -6,7 +6,7 @@ const schema = mongoose.Schema({
     summary:       String,
     body:          String,
     createdAt:     { type: Date, default: Date.now() },
-    lastUpdatedAt: { type: Date, default: Date.now() }
+    lastUpdatedAt: { type: Date, default: Date.now() },
 });
 
 const Page = mongoose.model('Page', schema);

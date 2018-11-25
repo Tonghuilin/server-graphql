@@ -11,7 +11,7 @@ const {
           pageCreateUpdateResolver,
           pageRemoveResolver,
       }                      = require('./pageSchema');
-const { User: UserMongoose } = require('../../server/model/user');
+const { User: UserMongoose } = require('../../model/user');
 
 const schema = new GraphQLSchema({
     query:    new GraphQLObjectType({

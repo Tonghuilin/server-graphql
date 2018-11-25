@@ -3,7 +3,7 @@ const {
           GraphQLString,
           GraphQLInt,
       }                              = require('graphql/type');
-const { Page: PageMongoose }         = require('../../server/model/page');
+const { Page: PageMongoose }         = require('../../model/page');
 const { getProjection, filterProps } = require('./helper');
 
 /**

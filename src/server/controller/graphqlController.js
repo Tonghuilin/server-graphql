@@ -1,6 +1,6 @@
 const graphqlHTTP    = require('express-graphql');
-const { logRequest } = require('../core/logger');
-const { schema }     = require('../../graphql/schema/Schema');
+const { logRequest } = require('../helper/logger');
+const { schema }     = require('../graphql/schema/schema');
 
 const graphqlController = graphqlHTTP((req) => {
     logRequest(req);
