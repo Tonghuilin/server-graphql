@@ -7,14 +7,19 @@ const { mongoose } = require('./db/mongoose');
 const { logger }   = require('./core/logger');
 
 // Controllers
-const { controlGraphql } = require('./middleware/graphql');
+const { graphqlController } = require('./controller/graphqlController');
+const { viewController }    = require('./controller/viewController');
 
 // Define server
 const PORT = process.env.PORT;
 const app  = express();
 
-// Apply middleware
-app.use('/graphql', controlGraphql);
+
+
+// Graphql
+app.use('/graphql', graphqlController);
+
+app.get('/page', viewController);
 
 // Start
 app.listen(process.env.PORT, () => {

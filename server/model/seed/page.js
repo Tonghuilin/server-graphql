@@ -24,8 +24,11 @@ const cleanPages = () =>
 const populatePages = (pages) =>
     cleanPages().then(() => Page.insertMany(pages));
 
+const findPage = (condition) => Page.find(condition);
+
 module.exports = {
     makePages,
-    populatePages,
     cleanPages,
+    populatePages,
+    findPage,
 };

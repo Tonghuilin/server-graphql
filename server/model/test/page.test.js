@@ -37,6 +37,7 @@ describe('Model: page', () => {
 
         page.save().then(() => {
             fail('The new page should not be saved.');
+            done();
         }).catch((err) => {
             expect(err).toBeTruthy();
             done();

@@ -1,7 +1,11 @@
 {
   "name": "thl",
-  "version": "1.0.0",
   "description": "Tonghuilin web site",
+  "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yanchi830/thl"
+  },
   "main": "server/server.js",
   "scripts": {
     "start": "NODE_ENV=development && node server/server.js",
@@ -13,12 +17,13 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.18.3",
+    "crypto-js": "^3.1.9-1",
     "express": "^4.16.4",
     "express-graphql": "^0.7.1",
     "graphql": "^14.0.2",
     "lodash": "^4.17.11",
     "mongodb": "^3.1.9",
-    "mongoose": "^5.3.11",
+    "mongoose": "^5.3.13",
     "npm": "^6.4.1",
     "react": "^16.7.0-alpha.0",
     "react-dom": "^16.7.0-alpha.0"

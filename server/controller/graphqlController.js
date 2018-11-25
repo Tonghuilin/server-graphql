@@ -2,7 +2,7 @@ const graphqlHTTP    = require('express-graphql');
 const { logRequest } = require('../core/logger');
 const { schema }     = require('../../graphql/schema/Schema');
 
-const controlGraphql = graphqlHTTP((req) => {
+const graphqlController = graphqlHTTP((req) => {
     logRequest(req);
     return ({
         schema,
@@ -10,5 +10,5 @@ const controlGraphql = graphqlHTTP((req) => {
 });
 
 module.exports = {
-    controlGraphql,
+    graphqlController,
 };
