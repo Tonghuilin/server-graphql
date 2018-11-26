@@ -80,7 +80,7 @@ describe('Server', () => {
                     });
             });
 
-            it('POST: should update a new page', (done) => {
+            it('POST: should update an existing page', (done) => {
                 const testPage = pagePool[0];
 
                 const query     = `mutation ($id: String!, $author: String) {
