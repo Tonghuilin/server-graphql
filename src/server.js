@@ -2,24 +2,21 @@
 require('./config');
 
 const express      = require('express');
-const bodyParser   = require('body-parser');
 const { mongoose } = require('./db/mongoose');
 const { logger }   = require('./helper/logger');
 
-// Controllers
-const { graphqlController } = require('./controller/graphqlController');
-
 // Constants
-const PORT       = process.env.PORT;
+const PORT = process.env.PORT;
 
-const app  = express();
+const app = express();
 
-// Graphql
-app.use('/graphql', graphqlController);
+// GraphQL
+require('./graphql')(app);
 
 // Start
 app.listen(process.env.PORT, () => {
-    logger.info(`Started up at PORT: ${PORT}`);
+    logger.info(`[ENV] ${process.env.NODE_ENV}`);
+    logger.info(`[PORT] ${PORT}`);
 });
 
 module.exports = {

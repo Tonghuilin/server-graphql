@@ -1,16 +1,22 @@
 const { mongoose } = require('../db/mongoose');
 
-const schema = mongoose.Schema({
-    title:         { type: String, required: true },
-    author:        { type: String, required: true },
-    summary:       String,
-    body:          String,
-    createdAt:     { type: Date, default: Date.now() },
-    lastUpdatedAt: { type: Date, default: Date.now() },
-});
+const schema = mongoose.Schema(
+    {
+        title:         { type: String, required: true },
+        author:        { type: String, required: true },
+        summary:       { type: String, default: '' },
+        body:          { type: String, default: '' },
+        archived:      { type: Boolean, default: false },
+    },
+    {
+        timestamps: {
+            updatedAt: 'lastUpdatedAt',
+        },
+    }
+);
 
 const Page = mongoose.model('Page', schema);
 
 module.exports = {
-    Page
+    Page,
 };

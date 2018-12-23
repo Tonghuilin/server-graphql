@@ -1,11 +1,11 @@
 const request = require('supertest');
-const { app } = require('../server');
+const { app } = require('../src/server');
 const {
           makePages,
           populatePages,
           cleanPages,
           findPage,
-      }       = require('../model/seed/page');
+      }       = require('../src/model/seed/page');
 
 describe('Server', () => {
     describe('/graphql', () => {

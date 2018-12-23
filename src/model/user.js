@@ -1,29 +1,28 @@
 const { mongoose } = require('../db/mongoose');
 
-const schema = mongoose.Schema({
-    firstName:     {
-        type:     String,
-        required: true,
+const schema = mongoose.Schema(
+    {
+        username:     { type: String, default: '', unique: true },
+        password:     { type: String, required: true },
+        firstName:    { type: String, required: true },
+        lastName:     { type: String, required: true },
+        mobile:       { type: String, default: '' },
+        social:       {
+            wechat: { type: String, default: '' },
+            weibo:  { type: String, default: '' },
+            qq:     { type: String, default: '' },
+            email:  { type: String, default: '' },
+        },
+        lastLoggedIn: { type: String, default: '' },
+        archived:     { type: Boolean, default: false },
+        role:         { type: String, default: 'USER' },
     },
-    lastName:      {
-        type:     String,
-        required: true,
+    {
+        timestamps: {
+            updatedAt: 'lastUpdatedAt',
+        },
     },
-    username:      String,
-    password:      {
-        type:     String,
-        required: true,
-    },
-    mobile:        Number,
-    createdAt:     {
-        type:    Date,
-        default: Date.now()
-    },
-    lastUpdatedAt: {
-        type:    Date,
-        default: Date.now()
-    },
-});
+);
 
 const User = mongoose.model('User', schema);
 

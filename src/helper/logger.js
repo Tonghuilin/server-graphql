@@ -1,5 +1,5 @@
 const info = (...args) => {
-    if (process.env.NODE_ENV !== 'test') {
+    if (process.env.NODE_ENV === 'development') {
         console.log(...args);
     }
 };
